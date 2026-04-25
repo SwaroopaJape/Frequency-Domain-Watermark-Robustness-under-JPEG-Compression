@@ -1,0 +1,2 @@
+# Frequency-Domain-Watermark-Robustness-under-JPEG-Compression
+We evaluated the robustness of spatial and frequency-domain digital watermarks against JPEG compression. Testing LSB, DCT, and DWT methods with binary, logo, and text watermarks across six embedding strengths ($\alpha$) and eight JPEG quality factors, we measured performance using PSNR, SSIM, NCC, and BER to determine optimal survival rates.

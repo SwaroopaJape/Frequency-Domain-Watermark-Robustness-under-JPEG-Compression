@@ -43,7 +43,7 @@ This pulls `camera`, `coins`, `moon`, `brick`, and `astronaut` from `skimage.dat
 
 **Run on your own images**
 ```bash
-python analyze.py --image path/to/image.png --out results.csv
+python analyze.py <path_to_image>
 ```
 Images can be colour — they are converted to grayscale internally.
 

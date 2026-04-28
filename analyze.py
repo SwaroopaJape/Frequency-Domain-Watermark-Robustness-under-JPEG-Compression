@@ -13,8 +13,8 @@ from attack import jpeg_attack
 ALPHA_SWEEP = [0.01, 0.05, 0.1, 0.3, 0.5, 1.0]
 QF_SWEEP    = [5, 10, 20, 30, 50, 70, 90, 100]
 
-WM_N_BITS = 512   
-WM_TEXT   = "CS611-IIT-GOA-WATERMARK"
+WM_N_BITS = None
+WM_TEXT   = "CS611-IIT-GOA-WATERMARK" * 20
 
 # capacity calculation
 def _method_capacity(method, img: np.ndarray) -> int:
@@ -26,11 +26,11 @@ def _method_capacity(method, img: np.ndarray) -> int:
     else:  
         return (h // 2) * (w // 2)
 
-# watermark calculation
 def build_watermarks(capacity_bits: int) -> dict:
-    wm_bin  = wm_binary(n_bits=min(WM_N_BITS, capacity_bits))
-    wm_lg   = wm_logo(size=32).flatten()[:min(1024, capacity_bits)]
-    wm_txt  = wm_text(WM_TEXT)[:min(len(wm_text(WM_TEXT)), capacity_bits)]
+    n = max(1024, capacity_bits // 4)   # 25% of method capacity
+    wm_bin = wm_binary(n_bits=n)
+    wm_lg  = wm_logo(size=64).flatten()[:n]   # 64 instead of 32 -> 4096 bits available
+    wm_txt = wm_text(WM_TEXT)[:n]
     return {"binary": wm_bin, "logo": wm_lg, "text": wm_txt}
 
 # a single set of parameters on a single img
